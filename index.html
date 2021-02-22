@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="sendReq(event)">
+      <input type="text" id="username" name="username" />
+      <input type="text" id="password" name="password" />
+      <button>Submit</button>
+    </form>
+  </body>
+  <script>
+    function sendReq(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const data = {
+        oldPassword: username,
+        newPassword: password,
+      };
+      console.log(JSON.stringify(data));
+      fetch('http://www.localhost:5000/', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log('uso'));
+    }
+  </script>
+</html>
